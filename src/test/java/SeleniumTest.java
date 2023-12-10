@@ -1,5 +1,6 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -91,6 +92,25 @@ public class SeleniumTest {
 
 	@Test
 	public void test5() {
+		WebElement nomeInput = driver.findElement(By.id("uid"));
+    assertNotNull(nomeInput);
+    
+    WebElement campoUsuario = driver.findElement(By.name("uid"));
+		assertNotNull(campoUsuario);
+    
+    WebElement submitButton = driver.findElement(By.xpath("//form[@id='seuFormulario']/button[@type='submit']"));
+    assertNotNull(submitButton);
+
+    // Preencha o formulário
+    nomeInput.sendKeys("Daniel");
+    campoUsuario.sendKeys("Daniel");
+
+    // Clique no botão de envio
+    submitButton.click();
+
+    // Verifique se o elemento esperado está presente na página
+    WebElement elementoResultado = driver.findElement(By.id("elementoResultado"));
+    assertTrue(elementoResultado.isDisplayed(), "O elemento resultado não está presente na página após enviar o formulário.");
 
 	}
 
